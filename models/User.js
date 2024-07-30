@@ -1,28 +1,35 @@
 // modeled after mini project
-const { Schema, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const assignmentSchema = new Schema(
+const userSchema = new Schema(
   {
-    assignmentId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+    username: {
+    type: String,
+    unique: true,
+    required: "Username is Required",
+    trim: true,
     },
-    assignmentName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
+    
+    email: {
+    type: String,
+    required: "Username is Required",
+    unique: true,
+    match: [/.+@.+\..+/],
     },
-    score: {
-      type: Number,
-      required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+    
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+    
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
@@ -32,4 +39,9 @@ const assignmentSchema = new Schema(
   }
 );
 
-module.exports = assignmentSchema;
+// virtual based off of problem 21
+userSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
+  });
+
+module.exports = userSchema;
