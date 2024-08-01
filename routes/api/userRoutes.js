@@ -1,20 +1,29 @@
 const router = require('express').Router();
 const {
-  get,
-  get,
-  create,
-  update,
-  delete,
-} = require('../../controllers/courseController.js');
+  getAllUser,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  removeFriend,
+} = require('../../controllers/userController.js');
 
-// /api/courses
-router.route('/').get(get).post(create);
+// /api/users
+router.route('/')
+  .get(getAllUser)
+  .post(createUser);
 
-// /api/courses/:courseId
-router
-  .route('/:Id')
-  .get(get)
-  .put(update)
-  .delete(delete);
+// /api/users/:id
+router.route('/id')
+  .get(getUserById)
+  .put(updateUser)
+  .delete(deleteUser);
+
+// /api/user/  ???
+router.route('/')
+  .get(  path  )
+  .post(addFriend)
+  .delete(removeFriend);
 
 module.exports = router;
