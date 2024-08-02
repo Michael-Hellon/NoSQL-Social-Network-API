@@ -6,11 +6,15 @@ const thoughtController [
 
 // get all thoughts
   getAllThoughts(req, res) {
-
+    Thought.find()
   }
 // get thoughts by ID
   getThoughtById(req, res) {
   
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
 // create thought
   createThought(req, res) {
@@ -19,18 +23,31 @@ const thoughtController [
 // update thoughts
   updateThought(req, res) {
   
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
 // delete thoughts
   deleteThought(req, res) {
   
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   } 
 // add reaction
   addReaction(req, res) {
 
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
 // delete reaction
   deleteReaction(req, res) {
 
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
 ]
 
@@ -53,7 +70,7 @@ module.exports = {
       .populate('students');
 
       if (!course) {
-        return res.status(404).json({ message: 'No course with that ID' });
+        return res.status(404).json({ message: 'No thought with that ID' });
       }
 
       res.json(course);

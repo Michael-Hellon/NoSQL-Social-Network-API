@@ -14,6 +14,10 @@ const userController [
 // get users by ID
   getUserById(req, res) {
 
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
     
 // create users
@@ -24,21 +28,36 @@ const userController [
 // update users
   updateUser(req, res) {
 
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
   
 // delete users
   deleteUser(req, res) {
 
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
    
 // add reaction
   addFriend(req, res) {
 
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
     
 // delete reaction
   removeFriend(req, res) {
 
+
+    if (!course) {
+      return res.status(404).json({ message: 'No thought with that ID' });
+    }
   }
   
   ]
