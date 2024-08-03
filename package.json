@@ -1,7 +1,7 @@
 {
   "name": "Social-Network-API",
   "version": "1.0.1",
-  "description": "Mongoose back-end project - Develop",
+  "description": "Mongoose back-end project",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,7 @@
     "seed": "node utils/seed"
   },
   "dependencies": {
+    "dateformat": "^5.0.3",
     "express": "^4.17.1",
     "mongoose": "^8.0.0",
     "Social-Network-API": "file:"
