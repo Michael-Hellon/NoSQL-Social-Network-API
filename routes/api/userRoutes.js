@@ -3,7 +3,7 @@ const {
   getAllUser,
   getUserById,
   createUser,
-  updateUser, // not used yet
+  updateUser, 
   deleteUser,
   addFriend,
   removeFriend,

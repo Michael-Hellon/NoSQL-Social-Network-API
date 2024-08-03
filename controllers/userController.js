@@ -58,13 +58,18 @@ module.exports = {
   },
 
 // update users
-  // updateUser(req, res) {
-  //   User.findOneAndUpdate{{}}
-
-  //   if (!user) {
-  //     return res.status(404).json({ message: 'No user with that ID' });
-  //   }
-  // }
+  async updateUser({ params, body }, res) {
+    User.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
+      .then((dbUserData) => {
+        if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+        }
+        res.json(dbUserData);
+      })
+    },
   
 // delete users
   async deleteUser(req, res) {
@@ -112,7 +117,7 @@ module.exports = {
   } catch (err) {
     res.status(500).json(err);
   }
-}, 
+  }, 
 
 // delete reaction
   async removeFriend(req, res) {
