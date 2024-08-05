@@ -2,7 +2,7 @@ const { Thought, User } = require('../models');
 
 module.exports = {
 
-// get all thoughts
+// get all thoughts - WORKS
   async getAllThoughts(req, res) {
     try {
       const thoughts = await Thought.find()
@@ -13,11 +13,11 @@ module.exports = {
     }
   }, 
 
-// get thoughts by ID
+// get thoughts by ID - WORKS
   async getThoughtById(req, res) {
     try {
       const thoughts = await Thought.findOne(
-        { _id: req.params.thoughtId})
+        { _id: req.params.id})
         .populate({
           path: "reactions",
           select: "-__v",
@@ -33,7 +33,7 @@ module.exports = {
     }
   },
 
-// create / add thought
+// create / add thought - WORKS
   async createThought(req, res) {
     try {
       const thoughts = await Thought.create(req.body);
@@ -49,11 +49,11 @@ module.exports = {
     }
   },
 
-// update thoughts
+// update thoughts - WORKS
   async updateThought(req, res) {
     try {
       const thoughts = await Thought.findOneAndUpdate(
-        { _id: req.params.thoughtId },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
       );
@@ -66,10 +66,10 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-// delete thoughts
+// delete thoughts - WORKS
   async deleteThought(req, res) {
     try {
-      const thoughts = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
+      const thoughts = await Thought.findOneAndDelete({ _id: req.params.id });
 
     if (!thoughts) {
       return res.status(404).json({ message: 'No thought with that ID' });
@@ -82,15 +82,19 @@ module.exports = {
   },
 
 // add reaction
-  async addReaction(req, res) {
+  async addReaction({ params,body }, res) {
     try {
-      const reaction = await Reaction.create(reg.body);
-
-      if (!thoughts) {
+      const reaction = await Thought.findOneAndUpdate(reg.body)(
+      { _id: params.thoughtId },
+      { $addToSet: { reactions: body } },
+      { runValidators: true, new: true, }
+      );
+      
+      if (!reaction) {
         return res.status(404).json({ message: 'No thought with that ID' });
       }
   
-      res.status(200).json({ message: 'Reaction added', reaction});
+      res.status(200).json({ message: 'Reaction added'});
 
     } catch (err) {
       console.log(err);
