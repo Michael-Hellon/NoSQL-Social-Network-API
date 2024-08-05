@@ -2,7 +2,7 @@ const { Thought, User } = require('../models');
 
 module.exports = {
 
-// get all Users
+// get all Users - WORKS
   async getAllUser(req, res) {
     try {
       const users = await User.find()
@@ -21,19 +21,19 @@ module.exports = {
     
   },
 
-// get users by ID
+// get users by ID 
   async getUserById(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
-        // .populate({
-        //   path: "thoughts",
-        //   select: "-__v",
-        // })
-        // .populate({
-        //   path: "friends",
-        //   select: "-__v",
-        // })
-        .select("-__v")
+        .populate({
+          path: "thoughts",
+          select: "-__v",
+        })
+        .populate({
+          path: "friends",
+          select: "-__v",
+        })
+        .select('-__v')
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -44,8 +44,8 @@ module.exports = {
       return res.status(500).json(err);
     }
   },  
-    
-// create or add users
+
+// create or add users - WORKS
   async createUser(req, res) {
     try {
       const user = await User.create(req.body);

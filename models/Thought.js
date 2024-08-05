@@ -48,7 +48,7 @@ const dateFormat = require("../utils/dateFormat");
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        // get: (timestamp) => dateFormat(timestamp),
       },
   
       username: {

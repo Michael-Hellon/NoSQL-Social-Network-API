@@ -8,26 +8,26 @@ const {
   deleteThought,
   addReaction,
   deleteReaction
-} = require('../../controllers/thoughtController.js');
+} = require("../../controllers/thoughtController.js");
 
 // /api/thoughts
-router.route('/')
+router.route("/")
   .get(getAllThoughts)
   .post(createThought);
 
 // /api/thoughts/:id
 router
-  .route('/:id')
+  .route("/:id")
   .get(getThoughtById)
   .put(updateThought)
   .delete(deleteThought); 
 
 // /api/thoughts/:thoughtId/reactions
-router.route('/:thoughtId/reactions')
+router.route("/:thoughtId/reactions")
   .post(addReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId
-router.route('/:thoughtId/reactions/:reactionId')
+router.route("/:thoughtId/reactions/:reactionId")
   .post(deleteReaction);
 
 
