@@ -34,20 +34,24 @@ module.exports = {
   },
 
 // create / add thought - WORKS
-  async createThought(req, res) {
-    try {
-      const thoughts = await Thought.create(req.body);
-
-      if (!thoughts) {
-        return res.status(404).json({ message: 'No thought with that ID' });
-      }
-
-      res.json(thoughts);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
+async createThought(req, res) {
+  try {
+    const thoughts = await Thought.create(req.body);
+    const userData = await User.findOneAndUpdate(
+      { _id: req.body.userId },
+      { $push: {thoughts: thoughts._id  } },
+      { runValidators: true, new: true }
+    );
+    if (!thoughts) {
+      return res.status(404).json({ message: 'No thought with that ID' });
     }
-  },
+
+    res.json(thoughts);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+},
 
 // update thoughts - WORKS
   async updateThought(req, res) {
@@ -82,9 +86,9 @@ module.exports = {
   },
 
 // add reaction
-  async addReaction({ params,body }, res) {
+  async addReaction({ params, body }, res) {
     try {
-      const reaction = await Thought.findOneAndUpdate(reg.body)(
+      const reaction = await Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $addToSet: { reactions: body } },
       { runValidators: true, new: true, }
@@ -102,9 +106,13 @@ module.exports = {
     }
   },
 // delete reaction
-  async deleteReaction(req, res) {
+  async deleteReaction({ params },res) {
     try {
-      const reaction = await Reaction.findOneAndDelete({ _id: req.params.reactionID });
+      const reaction = await Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $pull: { reactions: { reactionId: params.reactionId } } },
+        { new: true }
+      )
 
       if (!reaction) {
       return res.status(404).json({ message: 'No reaction with that ID' });

@@ -10,9 +10,13 @@ module.exports = {
         path: "friends",
         select: "-__v",
       })
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+      })
       .select("-__v")
       .sort({ _id: -1 })
-
+      
      res.json(users)
     } catch (err) {
       console.log(err);
@@ -41,7 +45,7 @@ module.exports = {
       res.json(user);
     } catch (err) {
       console.log(err);
-      return res.status(500).json(err);
+      return res.status(500).json('No user with that ID');
     }
   },  
 
@@ -69,7 +73,7 @@ module.exports = {
       }
       res.json(user);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json('No user with that ID');
     }
   },
   
@@ -93,7 +97,7 @@ module.exports = {
       res.json({ message: 'User successfully deleted'}); 
     } catch (err) {
       console.log(err); 
-      res.status(500).json(err);
+      res.status(500).json('No user with that ID');
     }
   },
 
@@ -113,7 +117,7 @@ module.exports = {
 
       res.json(user);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json('No user with that ID');
     }
   }, 
 
@@ -132,7 +136,7 @@ module.exports = {
 
       res.json(user);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json('No user with that ID');
     }
   },
 

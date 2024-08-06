@@ -25,7 +25,9 @@ const dateFormat = require("../utils/dateFormat");
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: function (time) {
+          time.toLocaleDateString()
+        },
       },
     },
     {
@@ -48,9 +50,10 @@ const dateFormat = require("../utils/dateFormat");
       createdAt: {
         type: Date,
         default: Date.now,
-        // get: (timestamp) => dateFormat(timestamp),
-      },
-  
+        get: function (time) {
+          time.toLocaleDateString()
+        },
+      }, 
       username: {
         type: String,
         required: true,
