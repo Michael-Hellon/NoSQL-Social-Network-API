@@ -25,10 +25,9 @@ const dateFormat = require("../utils/dateFormat");
       createdAt: {
         type: Date,
         default: Date.now,
-        get: function (time) {
-          time.toLocaleDateString()
+        get: (date) => date.toLocaleDateString('en-US'),
         },
-      },
+      
     },
     {
       toJSON: {
@@ -50,9 +49,7 @@ const dateFormat = require("../utils/dateFormat");
       createdAt: {
         type: Date,
         default: Date.now,
-        get: function (time) {
-          time.toLocaleDateString()
-        },
+        get: (date) => date.toLocaleDateString('en-US'),
       }, 
       username: {
         type: String,
