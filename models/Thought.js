@@ -1,6 +1,5 @@
 // modeled after mini project
 const { Schema, model, Types  } = require('mongoose');
-const dateFormat = require("../utils/dateFormat");
 
 // has to be before ThoughtSchema to initialize
 // per instructions placed inside this model

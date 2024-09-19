@@ -49,8 +49,8 @@ My demo video for this project can be located at <https://youtu.be/YDkqt9qXYJM>
 
 You can email me with any questions at <mwhellon@yahoo.com>
 
-![screenshot](/assets/images/Screenshot_users.png)
-![screenshot](/assets/images/Screenshot_thoughts.png)
+![screenshot](assets/images/Screenshot_users.png)
+![screenshot](assets/images/Screenshot_thoughts.png)
 
 
 ## Credits
